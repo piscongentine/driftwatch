@@ -8,7 +8,8 @@
   <a href="requirements.txt"><img src="https://img.shields.io/badge/python-3.10%2B-4338ca" alt="Python 3.10 or newer"></a>
 </p>
 
-<!-- The CI badge assumes the repository lives at github.com/piscongentine/driftwatch. Change the slug if it does not. -->
+<!-- The CI badge assumes the repository lives at github.com/piscongentine/driftwatch. Change the slug if it does not.
+     While the repository is private, the badge and the Actions link 404 for anyone without access (GitHub hides private repos this way); both work as soon as it is made public or for a logged-in collaborator. -->
 
 # DriftWatch
 
