@@ -1,0 +1,9 @@
+# Everything the steps write lives in out/. Regenerate it with `make all`.
+out/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+.DS_Store

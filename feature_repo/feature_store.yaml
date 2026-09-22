@@ -1,0 +1,11 @@
+# Feast settings: local files only. No cloud account, no keys.
+# Paths are relative to this folder, so the whole repo can be moved or unzipped anywhere.
+project: driftwatch
+registry: ../out/feast/registry.db
+provider: local
+online_store:
+  type: sqlite
+  path: ../out/feast/online.db
+offline_store:
+  type: file
+entity_key_serialization_version: 3

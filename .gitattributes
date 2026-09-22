@@ -1,0 +1,12 @@
+# Keep line endings stable: a Windows checkout must not turn the Makefile or scripts into CRLF.
+* text=auto
+Makefile text eol=lf
+*.py text eol=lf
+*.sh text eol=lf
+*.svg text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+*.png binary
+*.gif binary
+*.parquet binary
+*.pkl binary

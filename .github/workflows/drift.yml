@@ -1,0 +1,54 @@
+name: Drift check
+
+# Runs the whole loop on every pull request that touches the pipeline, then checks that the
+# drift detector still behaves: quiet on healthy batches, loud on the drift we plant.
+
+on:
+  pull_request:
+    paths:
+      - "src/**"
+      - "config.py"
+      - "feature_repo/**"
+      - "requirements.txt"
+      - "tests/**"
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: make setup
+      - name: Run the loop
+        run: make data train live drift
+      - name: Detector quality gate
+        run: |
+          python - <<'PY'
+          import json, sys
+          d = json.load(open("out/summary.json"))["detection"]
+          print("precision", d["precision"], "recall", d["recall"], "false alarms", d["false_alarms"], "missed", d["missed"])
+          sys.exit(0 if d["precision"] >= 0.9 and d["recall"] >= 0.8 else 1)
+          PY
+      - name: Write the pull request summary
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          s, a = json.load(open("out/summary.json")), json.load(open("out/alerts.json"))
+          print("### Drift check\n")
+          print(f"Model holdout: precision {s['model']['precision']}, recall {s['model']['recall']}, AUC {s['model']['auc']}. Alerts: {a['counts']['alert']}, warnings: {a['counts']['warn']}.\n")
+          print("| Batch | Rows | Status | Drifted share |\n|---|---|---|---|")
+          for b in s["batches"]:
+              print(f"| {b['index']} | {b['rows']} | {b['status']} | {b.get('share', '-')} |")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: drift-results
+          path: |
+            out/summary.json
+            out/alerts.json
+            out/train_report.json

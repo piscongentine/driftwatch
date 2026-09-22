@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security problem (in this repo or upstream)
+    url: https://github.com/feast-dev/feast/blob/master/SECURITY.md
+    about: Never open a public issue for a vulnerability. Report it privately to the project's maintainers. Feast's policy is linked here.

@@ -1,0 +1,77 @@
+/* Design tokens: change a colour here and nothing else in the UI needs touching.
+   Light is the default; dark follows the system unless the toggle sets data-theme. */
+:root {
+  color-scheme: light;
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #f0f2f5;
+  --border: #dfe3e9;
+  --grid: #e7eaef;
+  --text: #111827;
+  --text-2: #3d4655;
+  --muted: #566070;
+  --accent: #4338ca;
+  --accent-soft: #eceefe;
+  --on-accent: #ffffff;
+  --ok: #146c33;
+  --ok-soft: #e6f6ec;
+  --warn: #8f5200;
+  --warn-soft: #fff3d9;
+  --alert: #b3221d;
+  --alert-soft: #fdebea;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.05);
+
+  --radius: 12px;
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 32px;
+  --s5: 48px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0c0f15;
+    --surface: #131822;
+    --surface-2: #1a202c;
+    --border: #262d3b;
+    --grid: #232a37;
+    --text: #e9ecf2;
+    --text-2: #bcc3d0;
+    --muted: #97a0b1;
+    --accent: #a5b4fc;
+    --accent-soft: #1f2440;
+    --on-accent: #0c0f15;
+    --ok: #5fd68a;
+    --ok-soft: #12291d;
+    --warn: #f3bd55;
+    --warn-soft: #2e2410;
+    --alert: #ff8f88;
+    --alert-soft: #331a19;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0c0f15;
+  --surface: #131822;
+  --surface-2: #1a202c;
+  --border: #262d3b;
+  --grid: #232a37;
+  --text: #e9ecf2;
+  --text-2: #bcc3d0;
+  --muted: #97a0b1;
+  --accent: #a5b4fc;
+  --accent-soft: #1f2440;
+  --on-accent: #0c0f15;
+  --ok: #5fd68a;
+  --ok-soft: #12291d;
+  --warn: #f3bd55;
+  --warn-soft: #2e2410;
+  --alert: #ff8f88;
+  --alert-soft: #331a19;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 270" role="img" aria-labelledby="t d">
+  <title id="t">How DriftWatch works</title>
+  <desc id="d">Sensor data goes into Feast, a model trains on it, live batches are pushed into Feast, Evidently compares them with the training reference, and results go to a dashboard and alerts. Moving dots show the data flowing.</desc>
+  <style>
+    text { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .node { fill: #171c33; stroke: #38407a; stroke-width: 1.5; }
+    .name { fill: #f2f4ff; font-size: 16px; font-weight: 650; }
+    .step { fill: #9aa3d0; font-size: 12.5px; }
+    .flow { fill: none; stroke: #8b9cff; stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 2 9; animation: move 1.1s linear infinite; }
+    .ref { stroke: #5fd68a; }
+    .head { fill: #8b9cff; }
+    .note { fill: #5fd68a; font-size: 12.5px; }
+    @keyframes move { to { stroke-dashoffset: -11; } }
+    @media (prefers-reduced-motion: reduce) { .flow { animation: none; } }
+  </style>
+  <rect width="1000" height="270" rx="20" fill="#0e1120"/>
+
+  <g>
+    <rect class="node" x="24" y="66" width="116" height="88" rx="14"/>
+    <text class="name" x="82" y="106" text-anchor="middle">Sensor data</text><text class="step" x="82" y="128" text-anchor="middle">make data</text>
+    <rect class="node" x="191" y="66" width="116" height="88" rx="14"/>
+    <text class="name" x="249" y="106" text-anchor="middle">Feast</text><text class="step" x="249" y="128" text-anchor="middle">offline + online</text>
+    <rect class="node" x="358" y="66" width="116" height="88" rx="14"/>
+    <text class="name" x="416" y="106" text-anchor="middle">Model</text><text class="step" x="416" y="128" text-anchor="middle">make train</text>
+    <rect class="node" x="526" y="66" width="116" height="88" rx="14"/>
+    <text class="name" x="584" y="106" text-anchor="middle">Live batches</text><text class="step" x="584" y="128" text-anchor="middle">make live</text>
+    <rect class="node" x="693" y="66" width="116" height="88" rx="14"/>
+    <text class="name" x="751" y="106" text-anchor="middle">Evidently</text><text class="step" x="751" y="128" text-anchor="middle">make drift</text>
+    <rect class="node" x="860" y="66" width="116" height="88" rx="14"/>
+    <text class="name" x="918" y="98" text-anchor="middle">Dashboard</text><text class="step" x="918" y="120" text-anchor="middle">and alerts</text><text class="step" x="918" y="138" text-anchor="middle">make ui</text>
+  </g>
+
+  <g>
+    <line class="flow" x1="146" y1="110" x2="185" y2="110"/><polygon class="head" points="185,104 197,110 185,116"/>
+    <line class="flow" x1="313" y1="110" x2="352" y2="110"/><polygon class="head" points="352,104 364,110 352,116"/>
+    <line class="flow" x1="480" y1="110" x2="520" y2="110"/><polygon class="head" points="520,104 532,110 520,116"/>
+    <line class="flow" x1="648" y1="110" x2="687" y2="110"/><polygon class="head" points="687,104 699,110 687,116"/>
+    <line class="flow" x1="815" y1="110" x2="854" y2="110"/><polygon class="head" points="854,104 866,110 854,116"/>
+    <path class="flow ref" d="M416 160 C 416 236, 751 236, 751 160" fill="none"/>
+    <polygon points="745,166 751,154 757,166" fill="#5fd68a"/>
+    <path class="flow" d="M584 60 C 584 20, 249 20, 249 60" fill="none"/>
+    <polygon points="243,54 249,66 255,54" class="head"/>
+  </g>
+  <text class="note" x="583" y="252" text-anchor="middle">training reference</text>
+  <text class="step" x="416" y="30" text-anchor="middle">pushed into Feast, read back for every check</text>
+</svg>

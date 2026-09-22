@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DriftWatch</title>
+  <meta name="description" content="Drift monitoring for machine sensors: Feast is the source of truth, Evidently does the checking.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' rx='8' fill='%234338ca'/%3E%3Cpath d='M5 17c3 0 3-6 6-6s3 8 6 8 3-6 6-6' stroke='white' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="chart.js" defer></script>
+  <script src="render.js" defer></script>
+  <script src="tables.js" defer></script>
+  <script src="theme.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 28 28" aria-hidden="true">
+        <rect width="28" height="28" rx="8" fill="var(--accent)"/>
+        <path d="M5 17c3 0 3-6 6-6s3 8 6 8 3-6 6-6" stroke="var(--on-accent)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <h1>DriftWatch</h1>
+        <p class="tag">Feast keeps the features, Evidently watches them drift</p>
+      </div>
+    </div>
+    <div class="tools">
+      <nav class="nav" aria-label="Pages"><a href="index.html" aria-current="page">Dashboard</a><a href="about.html">About</a></nav>
+      <span class="chip" id="lastrun">Loading</span>
+      <button class="icon-btn" id="theme" type="button" aria-label="Switch colour theme"></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="state" class="panel"><p class="loading">Loading results</p></section>
+    <div id="content" hidden>
+      <section class="cards" id="cards" aria-label="Summary"></section>
+      <p class="strip" id="strip"></p>
+
+      <section aria-labelledby="h-trend">
+        <h2 id="h-trend">Drift over time</h2>
+        <p class="lede">One chart per monitored column, one point per live batch. Above the dashed line the column has drifted from the training reference. A cross marks a batch that was empty or too small to test.</p>
+        <div class="charts" id="charts"></div>
+      </section>
+
+      <div class="cols">
+        <section aria-labelledby="h-feat">
+          <h2 id="h-feat">Features</h2>
+          <div class="panel" id="features"></div>
+        </section>
+        <section aria-labelledby="h-alerts">
+          <h2 id="h-alerts">Alerts</h2>
+          <div class="panel" id="alerts"></div>
+        </section>
+      </div>
+
+      <section aria-labelledby="h-lab">
+        <h2 id="h-lab">Issue Lab</h2>
+        <div class="panel" id="lab"></div>
+      </section>
+    </div>
+  </main>
+  <footer id="foot"></footer>
+</body>
+</html>

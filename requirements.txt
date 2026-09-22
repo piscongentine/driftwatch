@@ -1,0 +1,9 @@
+# DriftWatch needs only these. feast and evidently are pinned on purpose: src/workarounds.py and
+# the Issue Lab describe exactly these releases. To test whether an upstream fix has landed:
+#   pip install -U feast evidently   then   make issues
+# The [grpcio] extra is Feast's own optional part; only Issue Lab repros feast_6842 and feast_6845 use it.
+feast[grpcio]==0.66.0
+evidently==0.7.23
+pandas>=2.2,<3
+scikit-learn>=1.5
+pytest>=8

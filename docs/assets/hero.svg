@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" role="img" aria-labelledby="t d">
+  <title id="t">DriftWatch</title>
+  <desc id="d">Animated banner. A line that follows machine sensor readings slowly rises and crosses a dashed drift limit.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0e1120"/>
+      <stop offset="1" stop-color="#232a5c"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8b9cff" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#8b9cff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <style>
+    text { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .grid { stroke: #ffffff; stroke-opacity: 0.07; stroke-width: 1; }
+    .limit { stroke: #ff8f88; stroke-width: 2; stroke-dasharray: 8 8; }
+    .line { fill: none; stroke: #8b9cff; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 7s ease-in-out infinite; }
+    .area { fill: url(#glow); opacity: 0; animation: area 7s ease-in-out infinite; }
+    .dot { fill: #ff8f88; opacity: 0; animation: dot 7s ease-in-out infinite; }
+    .ring { fill: none; stroke: #ff8f88; stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; animation: ring 7s ease-out infinite; }
+    @keyframes draw { 0% { stroke-dashoffset: 1; opacity: 1; } 55%, 92% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+    @keyframes area { 0%, 20% { opacity: 0; } 55%, 92% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes dot { 0%, 44% { opacity: 0; } 50%, 92% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes ring { 0%, 46% { opacity: 0; transform: scale(1); } 50% { opacity: 0.9; transform: scale(1); } 74%, 100% { opacity: 0; transform: scale(3.2); } }
+    @media (prefers-reduced-motion: reduce) {
+      .line, .area, .dot { animation: none; stroke-dashoffset: 0; opacity: 1; }
+      .ring { animation: none; opacity: 0; }
+    }
+  </style>
+  <rect width="1200" height="320" rx="24" fill="url(#bg)"/>
+  <g class="grid">
+    <line x1="620" y1="60" x2="1160" y2="60"/><line x1="620" y1="120" x2="1160" y2="120"/>
+    <line x1="620" y1="180" x2="1160" y2="180"/><line x1="620" y1="240" x2="1160" y2="240"/>
+  </g>
+  <line class="limit" x1="620" y1="140" x2="1160" y2="140"/>
+  <text x="1160" y="130" text-anchor="end" font-size="15" fill="#ff8f88">drift limit</text>
+  <path class="area" d="M640 222 L690 214 L740 224 L790 216 L840 220 L890 206 L940 176 L990 146 L1040 112 L1090 86 L1140 62 L1140 250 L640 250 Z"/>
+  <path class="line" pathLength="1" d="M640 222 L690 214 L740 224 L790 216 L840 220 L890 206 L940 176 L990 146 L1040 112 L1090 86 L1140 62"/>
+  <circle class="ring" cx="999" cy="140" r="9"/>
+  <circle class="dot" cx="999" cy="140" r="7"/>
+  <text x="72" y="148" font-size="76" font-weight="700" fill="#f2f4ff" letter-spacing="-2">DriftWatch</text>
+  <text x="74" y="202" font-size="27" fill="#c6ccf0">Feast keeps the features.</text>
+  <text x="74" y="238" font-size="27" fill="#c6ccf0">Evidently watches them drift.</text>
+  <text x="74" y="284" font-size="18" fill="#8f98c4">An open-source MLOps loop, small enough to read in twenty minutes</text>
+</svg>

@@ -1,0 +1,47 @@
+#!/usr/bin/expect -f
+# Types the four demo commands into a real bash session, one character at a time, and waits for each one's
+# real last line of output before moving on. asciinema records what appears on the terminal.
+# log_user 0 keeps expect's own lines (the "spawn" echo at the start, the closing "exit") out of the recording.
+set timeout 240
+log_user 0
+spawn env {PS1=$ } TERM=xterm-256color bash --noprofile --norc
+log_user 1
+expect "$ "
+
+proc typecmd {cmd} {
+    foreach ch [split $cmd ""] {
+        send -- $ch
+        expect -re {.}
+        sleep 0.045
+    }
+    send "\r"
+}
+
+sleep 1
+typecmd "make data"
+expect -re {wrote}
+expect "$ "
+sleep 3
+
+typecmd "make train"
+expect -re {reference:}
+expect "$ "
+sleep 5
+
+typecmd "clear"
+expect "$ "
+typecmd "make live"
+expect -re {live_log}
+expect "$ "
+sleep 4
+
+typecmd "clear"
+expect "$ "
+typecmd "make drift"
+expect -re {alert\(s\)}
+expect "$ "
+sleep 8
+
+log_user 0
+send "exit\r"
+expect eof

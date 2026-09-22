@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About DriftWatch</title>
+  <meta name="description" content="What DriftWatch does, why it exists, how it compares, and who it belongs to.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' rx='8' fill='%234338ca'/%3E%3Cpath d='M5 17c3 0 3-6 6-6s3 8 6 8 3-6 6-6' stroke='white' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="render.js" defer></script>
+  <script src="theme.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 28 28" aria-hidden="true">
+        <rect width="28" height="28" rx="8" fill="var(--accent)"/>
+        <path d="M5 17c3 0 3-6 6-6s3 8 6 8 3-6 6-6" stroke="var(--on-accent)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <h1>About DriftWatch</h1>
+        <p class="tag">A small, open-source loop from feature store to drift alert</p>
+      </div>
+    </div>
+    <div class="tools">
+      <nav class="nav" aria-label="Pages"><a href="index.html">Dashboard</a><a href="about.html" aria-current="page">About</a></nav>
+      <button class="icon-btn" id="theme" type="button" aria-label="Switch colour theme"></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="fade" aria-labelledby="h-what">
+      <h2 id="h-what">What it is</h2>
+      <div class="prose">
+        <p>DriftWatch is a working example of machine-learning monitoring that runs on a laptop. Feast keeps the sensor features of a fleet of machines. A small model learns from that history. New batches of readings arrive, and some of them slowly drift. Evidently compares every batch with the training data, and this dashboard and the alerts show what changed.</p>
+        <p>A <b>feature store</b> is a shared place for the numbers a model uses, so training and serving read the same values. <b>Drift</b> means the data a model sees today no longer looks like the data it learned from, so its answers quietly get worse.</p>
+      </div>
+    </section>
+
+    <section class="fade" style="--i:1" aria-labelledby="h-can">
+      <h2 id="h-can">What it can do</h2>
+      <div class="cards">
+        <article class="card"><h3>Keep features in Feast</h3><p class="sub">A file offline store for history and a SQLite online store for the latest values. Training data is built with a point-in-time correct join.</p></article>
+        <article class="card"><h3>Train and score a model</h3><p class="sub">A logistic regression on the older 60% of history, its decision threshold picked on the next 15%, and its accuracy, precision, recall and AUC measured on the newest 25%.</p></article>
+        <article class="card"><h3>Watch live batches</h3><p class="sub">Each batch is read back from Feast and tested against the training reference. Empty and tiny batches are handled, not hidden.</p></article>
+        <article class="card"><h3>Raise alerts</h3><p class="sub">When the drifted share passes a limit, a column keeps drifting, a feature view goes stale, or a batch could not be tested.</p></article>
+        <article class="card"><h3>Check itself</h3><p class="sub">We plant the drift, so the detector's own precision and recall are measured and tested in CI.</p></article>
+        <article class="card"><h3>Feed a PR sprint</h3><p class="sub">The Issue Lab holds one tiny reproduction per real upstream bug, and a four-week plan turns them into reviews and pull requests.</p></article>
+      </div>
+    </section>
+
+    <section class="fade" style="--i:2" aria-labelledby="h-why">
+      <h2 id="h-why">Why it is needed</h2>
+      <div class="prose">
+        <p>Models fail quietly when their inputs move. Most students meet drift only in slides. Feast and Evidently are usually taught apart, but the hard questions live where they meet: what is the reference, where do live batches come from, what happens with an empty batch or a constant column.</p>
+        <p>New contributors also need a safe way into open source. DriftWatch turns real, current upstream issues into small reproductions with clear expected results.</p>
+      </div>
+    </section>
+
+    <section class="fade" style="--i:3" aria-labelledby="h-better">
+      <h2 id="h-better">How it compares</h2>
+      <p class="lede">DriftWatch does not replace production tools. Feast now ships its own feature monitoring, Evidently has a monitoring UI and a hosted product, and managed platforms do much more. It is a better fit in these ways:</p>
+      <div class="two">
+        <article class="card"><h3>Where it fits better</h3>
+          <ul>
+            <li>Small enough to read in twenty minutes: one job per file, about 150 lines at most</li>
+            <li>No cloud account, no paid keys, no web framework, no npm build</li>
+            <li>Shows the join itself: Feast as the source of truth, Evidently as the checker, with the edge cases left in</li>
+            <li>A built-in path to contribute: the Issue Lab and the sprint</li>
+          </ul></article>
+        <article class="card"><h3>Where to use something else</h3>
+          <ul>
+            <li>Real production monitoring, scheduling, auth, and many users</li>
+            <li>Real data: ours is synthetic, and its model marks say nothing about real fleets</li>
+            <li>Anything at scale: it runs on one machine, on local files</li>
+          </ul></article>
+      </div>
+    </section>
+
+    <section class="fade bugs" style="--i:4" aria-labelledby="h-bugs">
+      <h2 id="h-bugs">What the reproduced bugs mean</h2>
+      <p class="lede">The Issue Lab runs one small program for each of 20 real upstream bugs. Reproduced means we still see the bug in the installed version. For each one, in short: why it happens, what it means, the trouble it can cause, and how it can be fixed. The README has the full table, with the pull requests.</p>
+      <h3>Evidently</h3>
+      <div class="panel"><ul class="why">
+        <li><p class="t"><a href="https://github.com/evidentlyai/evidently/issues/1929" target="_blank" rel="noopener">#1929</a> nan on a constant column</p><p class="d"><b>Why:</b> one category leaves nothing to compare. <b>Means:</b> the score is not a number. <b>Trouble:</b> nan breaks totals and JSON. <b>Fix:</b> return p = 1.0.</p></li>
+        <li><p class="t"><a href="https://github.com/evidentlyai/evidently/issues/1914" target="_blank" rel="noopener">#1914</a> G-test fails when sample sizes differ</p><p class="d"><b>Why:</b> expected counts are not rescaled. <b>Means:</b> it only works on equal-size samples. <b>Trouble:</b> the whole report aborts. <b>Fix:</b> rescale the counts, or use chi-square.</p></li>
+        <li><p class="t"><a href="https://github.com/evidentlyai/evidently/issues/1900" target="_blank" rel="noopener">#1900</a> Divergence tests on empty data</p><p class="d"><b>Why:</b> nothing checks for an empty series. <b>Means:</b> a crash or a silent nan. <b>Trouble:</b> monitoring stops, or goes on with a bad number, when data goes missing. <b>Fix:</b> raise a clear ValueError.</p></li>
+        <li><p class="t"><a href="https://github.com/evidentlyai/evidently/issues/1907" target="_blank" rel="noopener">#1907</a> alias= is dropped</p><p class="d"><b>Why:</b> seven helpers do not pass it on. <b>Means:</b> the name you give a test is ignored. <b>Trouble:</b> reports and alerts show the wrong label. <b>Fix:</b> pass alias through.</p></li>
+        <li><p class="t"><a href="https://github.com/evidentlyai/evidently/issues/1927" target="_blank" rel="noopener">#1927</a> No sequential drift metric</p><p class="d"><b>Why:</b> a missing feature; batches are tested one by one. <b>Means:</b> slow drift stays hidden. <b>Trouble:</b> it is noticed late. <b>Fix:</b> add a CUSUM metric (ask the maintainers first).</p></li>
+        <li><p class="t"><a href="https://github.com/evidentlyai/evidently/issues/1902" target="_blank" rel="noopener">#1902</a> No calibration metric</p><p class="d"><b>Why:</b> a missing feature. <b>Means:</b> you cannot check that confidence matches accuracy. <b>Trouble:</b> an over-confident model goes unnoticed. <b>Fix:</b> add ECE and a reliability diagram.</p></li>
+        <li><p class="t"><a href="https://github.com/evidentlyai/evidently/issues/1905" target="_blank" rel="noopener">#1905</a> Dead link in the docs</p><p class="d"><b>Why:</b> the linked folder is not on main. <b>Means:</b> a docs error, not a code bug. <b>Trouble:</b> newcomers land on a 404. <b>Fix:</b> correct the link.</p></li>
+        <li><p class="t"><a href="https://github.com/evidentlyai/evidently/issues/1898" target="_blank" rel="noopener">#1898</a> Quickstart lacks openai</p><p class="d"><b>Why:</b> the install line leaves it out. <b>Means:</b> the guide fails as written. <b>Trouble:</b> a new user gets stuck. <b>Fix:</b> add openai to the docs.</p></li>
+        <li><p class="t"><a href="https://github.com/evidentlyai/evidently/issues/1910" target="_blank" rel="noopener">#1910</a> litestar 3 import path</p><p class="d"><b>Why:</b> an import path that litestar 3 removed. <b>Means:</b> a future break; fine today. <b>Trouble:</b> evidently ui may fail on litestar 3. <b>Fix:</b> import from litestar.plugins.pydantic.</p></li>
+      </ul></div>
+      <h3>Feast</h3>
+      <div class="panel"><ul class="why">
+        <li><p class="t"><a href="https://github.com/feast-dev/feast/issues/6787" target="_blank" rel="noopener">#6787</a> Rows silently dropped</p><p class="d"><b>Why:</b> rows with the same key and time collapse into one. <b>Means:</b> fewer rows than you asked for, and no error. <b>Trouble:</b> lost rows and labels in training data. <b>Fix:</b> give each row a unique id.</p></li>
+        <li><p class="t"><a href="https://github.com/feast-dev/feast/issues/6817" target="_blank" rel="noopener">#6817</a> Empty entity frame (not seen on 0.66.0)</p><p class="d"><b>Why:</b> per the issue, a row-wise step fails on empty input. <b>Means:</b> a crash instead of an empty result. <b>Trouble:</b> a job with zero rows can crash. <b>Fix:</b> handle the empty case.</p></li>
+        <li><p class="t"><a href="https://github.com/feast-dev/feast/issues/6819" target="_blank" rel="noopener">#6819</a> Empty online request</p><p class="d"><b>Why:</b> nothing checks for zero rows. <b>Means:</b> an error instead of an empty answer. <b>Trouble:</b> an HTTP 500 looks like an outage. <b>Fix:</b> return an empty result.</p></li>
+        <li><p class="t"><a href="https://github.com/feast-dev/feast/issues/6796" target="_blank" rel="noopener">#6796</a> Empty Arrow table</p><p class="d"><b>Why:</b> it reads the first batch of a table that has none. <b>Means:</b> an internal helper crashes. <b>Trouble:</b> an empty push can stop a pipeline. <b>Fix:</b> return early.</p></li>
+        <li><p class="t"><a href="https://github.com/feast-dev/feast/issues/6805" target="_blank" rel="noopener">#6805</a> Precomputed retrieval loses order</p><p class="d"><b>Why:</b> results are filled by position after sorting. <b>Means:</b> answers do not match questions. <b>Trouble:</b> silently wrong values. <b>Fix:</b> map results back to the request rows.</p></li>
+        <li><p class="t"><a href="https://github.com/feast-dev/feast/issues/6821" target="_blank" rel="noopener">#6821</a> ttl not enforced online</p><p class="d"><b>Why:</b> online reads skip the age check. <b>Means:</b> old values look fresh. <b>Trouble:</b> predictions from stale data. <b>Fix:</b> enforce ttl online.</p></li>
+        <li><p class="t"><a href="https://github.com/feast-dev/feast/issues/6808" target="_blank" rel="noopener">#6808</a> Hyphenated project name</p><p class="d"><b>Why:</b> init skips the SQLite naming rule. <b>Means:</b> init succeeds, then loading fails. <b>Trouble:</b> a broken first project. <b>Fix:</b> reject the name.</p></li>
+        <li><p class="t"><a href="https://github.com/feast-dev/feast/issues/6790" target="_blank" rel="noopener">#6790</a> Join key dropped</p><p class="d"><b>Why:</b> a shared name is treated as request data only. <b>Means:</b> valid input is rejected. <b>Trouble:</b> a misleading error when serving. <b>Fix:</b> also count it as a join key.</p></li>
+        <li><p class="t"><a href="https://github.com/feast-dev/feast/issues/6845" target="_blank" rel="noopener">#6845</a> UI cannot create a feature view</p><p class="d"><b>Why:</b> the handler builds the source from a name only. <b>Means:</b> creating a view fails. <b>Trouble:</b> an internal error in the UI. <b>Fix:</b> resolve the source from the registry.</p></li>
+        <li><p class="t"><a href="https://github.com/feast-dev/feast/issues/6842" target="_blank" rel="noopener">#6842</a> Version not in the UI (merged, not released)</p><p class="d"><b>Why:</b> the fix is on master but not in 0.66.0. <b>Means:</b> wait for a release. <b>Trouble:</b> little; harder support. <b>Fix:</b> upgrade when it is released.</p></li>
+        <li><p class="t"><a href="https://github.com/feast-dev/feast/issues/6815" target="_blank" rel="noopener">#6815</a> On-demand function loses globals</p><p class="d"><b>Why:</b> it is rebuilt from source text alone. <b>Means:</b> it works where defined, not where served. <b>Trouble:</b> NameError when serving. <b>Fix:</b> change the serialization; keep functions self-contained.</p></li>
+      </ul></div>
+    </section>
+
+    <section class="fade" style="--i:5" aria-labelledby="h-open">
+      <h2 id="h-open">Open source, and whose it is</h2>
+      <div class="cards">
+        <article class="card"><p class="label">License</p><p class="big">Apache-2.0</p><p class="sub">The same license as both projects it builds on. Use it, change it, share it.</p></article>
+        <article class="card"><p class="label">Inspired by</p><p class="big">Feast and Evidently</p><p class="sub">The feature store from feast-dev, and the ML and LLM monitoring library from Evidently AI. DriftWatch is an independent club project. It is not affiliated with, endorsed by, or sponsored by either, and their names belong to their owners.</p></article>
+        <article class="card"><p class="label">Belongs to</p><p class="big">PiscongentinexMan</p><p class="sub">Owned and maintained by PiscongentinexMan and the contributors who help build it.</p></article>
+      </div>
+    </section>
+  </main>
+  <footer>See ABOUT.md and README.md in the repository for the same story with commands.</footer>
+</body>
+</html>
